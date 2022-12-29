@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body class="bg-white">
@@ -81,7 +81,7 @@
           <input type="number" class="form-control light-border" id="holder">
         </div>
       </form>
-      <a href="/history.html" class="btn btn-success col-1">
+      <a href="history.jsp" class="btn btn-success col-1">
         Book
       </a>
     </div>

@@ -161,7 +161,7 @@ body,
 }
 
 #landing-bg {
-    background-image: url("images/landing.png");
+    background-image: url("../images/landing.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
