@@ -1,6 +1,7 @@
 .heading{
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 3rem;
     text-align: center;
     color: black;
     font-style: italic;
@@ -15,55 +16,35 @@
     margin-left: auto;
 }
 
-.r1{
-font-size: large ;
-border: 2px solid black;
-
-}
-    .but1{
-        border: 2px solid black;
-    }
 
 
-
-.r2{
-    font-size: large ;
-    border: 2px solid black;
-    }
-    .but2{
-        border: 2px solid black;
-    }
-
-
-.r3{
-    font-size: large ;
-    border: 2px solid black;
-    }
-    .but3{
-        border: 2px solid black;
-    }
-
-
-.r4{
-    font-size: large ;
-    border: 2px solid black;
-    }
-    .but4{
-        border: 2px solid black;
-    }    
-
-
-
-.button{
-    padding: 1px;
-    border: none;
-    font-size: medium;
-    background-color: #10453A;
-    font-style: normal;
+button{
     color: white;
-    text-align: center;
-    float: right;
-    width: auto;
-    height: auto;
-    font-style:italic;
+    background-color: #00C3A0;
+    border:none;
+    border-radius:10px;
+    width: 10rem;
+    height: 2rem;
+    margin-left: 85%;
+    margin-top: 10%;
 }
+
+.elemnt{
+    border: 5px solid black;
+    margin: 1rem 1rem 1rem 1rem;
+    text-align: left;
+    width: 50%;
+    height: 10%;
+    padding: 0%;
+}
+
+select{
+    padding: 10%;
+    text-align: right;
+    width: 48%;
+    height: 10%;
+}
+label {
+    width: 50%;
+}
+
