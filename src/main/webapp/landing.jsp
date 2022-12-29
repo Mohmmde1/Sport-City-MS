@@ -65,12 +65,12 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="text-white nav-link" href="#">Facilities</a>
-          <a class="text-white nav-link" href="#">Events</a>
-          <a class="text-white nav-link" href="#">Equipment</a>
-          <a class="text-white nav-link" href="#">Booking</a>
+          <a class="text-white nav-link" href="event.jsp">Events</a>
+          <a class="text-white nav-link" href="equipMng.jsp">Equipment</a>
+          <a class="text-white nav-link" href="booking.jsp">Booking</a>
           <a class="text-white nav-link" href="#">Report</a>
           <a class="text-white nav-link" href="#">Feedback</a>
-          <a class="text-white nav-link" href="#">Recruit</a>
+          <a class="text-white nav-link" href="employees.jsp">Recruit</a>
         </div>
       </div>
     </div>

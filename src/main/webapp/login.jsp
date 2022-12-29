@@ -53,7 +53,7 @@
       <p class="text-white">
         haven't registered yet? <a href="register.jsp">click here</a>
       </p>
-      <a href="login.jsp" class="btn btn-outline-secondary">
+      <a href="landing.jsp" class="btn btn-outline-secondary">
         Login
       </a>
     </div>
