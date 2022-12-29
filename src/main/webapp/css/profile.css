@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+img{
+    padding-bottom: 1rem;
+    text-align: left;
+    width: 90px;
+    border-radius: 100px;
+
+}
+body{
+    margin-left: 3%;
+    margin-top: 1%;
+}
+.element{
+    margin-top: 1rem;
+}
+
+.save-button{
+    background-color: #00C3A0;
+    border-radius: 5%;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    margin-left: 85%;
+}

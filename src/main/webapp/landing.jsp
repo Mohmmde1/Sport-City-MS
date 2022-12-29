@@ -64,12 +64,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="text-white nav-link" href="#">Facilities</a>
+      <a class="text-white nav-link" href="manage_facilities.jsp">Facilities</a>  
+      <a class="text-white nav-link" href="manage_profile.jsp">Profile</a>
           <a class="text-white nav-link" href="event.jsp">Events</a>
           <a class="text-white nav-link" href="equipMng.jsp">Equipment</a>
           <a class="text-white nav-link" href="booking.jsp">Booking</a>
-          <a class="text-white nav-link" href="#">Report</a>
-          <a class="text-white nav-link" href="#">Feedback</a>
+          <a class="text-white nav-link" href="genrate_report.jsp">Report</a>
+          <a class="text-white nav-link" href="submit_feedback.jsp">Feedback</a>
           <a class="text-white nav-link" href="employees.jsp">Recruit</a>
         </div>
       </div>
@@ -78,7 +79,7 @@
 
 
   <div id="join-container" class="container d-flex justify-content-center ">
-    <a href="login.jsp" class="btn btn-success">
+    <a href="landing.jsp" class="btn btn-success">
       Join Now
     </a>
   </div>
