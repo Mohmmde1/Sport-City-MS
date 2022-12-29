@@ -17,7 +17,7 @@ td {
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center">
-        <form action=".jsp">
+        <form action="equipAcq.jsp" method="POST">
             <table>
                 <tr>
                     <th class="text-center" colspan="2">

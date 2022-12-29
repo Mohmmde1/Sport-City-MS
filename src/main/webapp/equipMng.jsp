@@ -78,6 +78,12 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="container d-flex flex-row-reverse">
+			<form action="equipAcq.jsp" method="GET">
+				<input class="btn btn-success" type="submit" value="New Equipment" />
+			</form>
+		</div>
+
 	</div>
 </body>
 </html>
