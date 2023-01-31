@@ -2,6 +2,7 @@
     <wb-module deploy-name="Sport-City">
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="context-root" value="Sport-City"/>
         <property name="java-output-path" value="/Sport-City/build/classes"/>
     </wb-module>
