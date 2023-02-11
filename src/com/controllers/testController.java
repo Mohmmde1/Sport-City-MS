@@ -1,6 +1,5 @@
 package com.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,60 +12,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.models.Admin;
-import com.models.Booking;
 import dbUtil.HibernateCF;
 
-
 /* You can use the following controller as a reference on how to use database operations with Hibernate */
-@Controller
+@Controller()
 public class testController {
-	Class[] classes = {Admin.class, Booking.class};
-	SessionFactory sessionFactory = HibernateCF.getSessionFactory(classes);
-	
+	SessionFactory sessionFactory = HibernateCF.getSessionFactory();
+
 	@RequestMapping("/test")
-	public String test (HttpServletRequest request) {
-		
+	public String test(HttpServletRequest request) {
+		Session session = sessionFactory.openSession();
+		session.close();
 		return "login";
 	}
-	
+
 	@RequestMapping("/getAll")
-	@ResponseBody()
+	@ResponseBody
 	public String getAll() {
-		Session session = sessionFactory.openSession(); 
-		
+		Session session = sessionFactory.openSession();
 
 		@SuppressWarnings("unchecked")
-		List<Admin> pList = session.createQuery("from admins").list();
+		List<Admin> adminList = session.createQuery("from Admin").list();
 		session.close();
-		return "this is from getAll - modelExample " + pList.toString();
+		return "this is from getAll - admin " + adminList.toString();
 	}
 
 	@RequestMapping("/getById")
-	//@ResponseBody()
 	public String getById(HttpServletRequest request, Model model) {
-		Session session = sessionFactory.openSession(); 
-		
-		
+		Session session = sessionFactory.openSession();
+
 		int id = Integer.parseInt(request.getParameter("id"));
 		Admin admin = session.get(Admin.class, id);
 		model.addAttribute("admin", admin);
 		session.close();
 		return "modelExampleDisplayInfo";
-		//return "this is from getById - modelExample :" + p.toString();
 	}
 
 	@RequestMapping("/add")
-	@ResponseBody()
+	@ResponseBody
 	public String add(HttpServletRequest request) {
-		Session session = sessionFactory.openSession(); 
-		
+		Session session = sessionFactory.openSession();
 
-		Admin prog = new Admin();
-		prog.setName(request.getParameter("name"));
-		prog.setNote(request.getParameter("note"));
+		Admin admin = new Admin();
+		admin.setId(Integer.parseInt(request.getParameter("id")));
 
 		session.beginTransaction();
-		session.save(prog);
+		session.save(admin);
 		session.getTransaction().commit();
 		session.close();
 
@@ -74,34 +65,35 @@ public class testController {
 	}
 
 	@RequestMapping("/update")
-	@ResponseBody()
+	@ResponseBody
 	public String update(HttpServletRequest request) {
-		
-		Session session = HibernateCF.getSessionFactory().openSession();
-		
-		modelExample p2u = session.get(modelExample.class, Integer.parseInt(request.getParameter("id")));
-		p2u.setName("aerobic class");
-		p2u.setNote(request.getParameter("note"));
-		
+
+		Session session = sessionFactory.openSession();
+
+		Admin admin = session.get(Admin.class, Integer.parseInt(request.getParameter("id")));
+		admin.setId(Integer.parseInt(request.getParameter("id")));
+
 		session.beginTransaction();
-		session.update(p2u);
+		session.update(admin);
 		session.getTransaction().commit();
-		
-		return "this is from update - modelExample";
+		session.close();
+
+		return "this is from add - modelExample";
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody()
 	public String delete(HttpServletRequest request) {
-		
-		Session session = HibernateCF.getSessionFactory().openSession();
-		
-		modelExample p2d = session.get(modelExample.class, Integer.parseInt(request.getParameter("id")));
-		
+
+		Session session = sessionFactory.openSession();
+
+		Admin admin = session.get(Admin.class, Integer.parseInt(request.getParameter("id")));
+
 		session.beginTransaction();
-		session.delete(p2d);
+		session.delete(admin);
 		session.getTransaction().commit();
-		
-		return "this is from delete - modelExample : "+p2d.toString()+" has been deleted";
+		session.close();
+
+		return "this is from delete - modelExample : " + admin.toString() + " has been deleted";
 	}
 }

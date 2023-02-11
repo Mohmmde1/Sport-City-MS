@@ -1,5 +1,5 @@
-CREATE DATABASE SportCityMS;
-USE SportCityMS;
+CREATE DATABASE scm;
+USE scm;
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -13,16 +13,14 @@ CREATE TABLE users (
 CREATE TABLE customers (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES User(id)
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE admins (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES User(id)
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
-
-
 
 CREATE TABLE facilities (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,15 +29,14 @@ CREATE TABLE facilities (
   capacity INT NOT NULL
 );
 
-
 CREATE TABLE bookings (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  customer_id INT NOT NULL,
-  facility_id INT NOT NULL,
+  customer_id INT,
+  facility_id INT,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
-  FOREIGN KEY (customer_id) REFERENCES Customer(id),
-  FOREIGN KEY (facility_id) REFERENCES Facility(id)
+  FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
+  FOREIGN KEY (facility_id) REFERENCES facilities(id) ON DELETE CASCADE
 );
 
 CREATE TABLE events (
@@ -69,8 +66,8 @@ CREATE TABLE equipments (
   details TEXT NOT NULL,
   provider_name VARCHAR(255) NOT NULL,
   provider_email VARCHAR(255) NOT NULL,
-  facility_id INT NOT NULL,
-  FOREIGN KEY (facility_id) REFERENCES Facility(id)
+  facility_id INT,
+  FOREIGN KEY (facility_id) REFERENCES facilities(id) ON DELETE CASCADE
 );
 
 CREATE TABLE feedbacks (
@@ -79,4 +76,3 @@ CREATE TABLE feedbacks (
   message TEXT NOT NULL,
   email VARCHAR(255) NOT NULL
 );
-
