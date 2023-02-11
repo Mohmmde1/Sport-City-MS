@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.models.Admin;
+import com.models.Booking;
 import dbUtil.HibernateCF;
 
 
 /* You can use the following controller as a reference on how to use database operations with Hibernate */
 @Controller
 public class testController {
-	ArrayList<Class> classes = {Admin.class};
-	SessionFactory session = HibernateCF.getSessionFactory(classes);
+	Class[] classes = {Admin.class, Booking.class};
+	SessionFactory sessionFactory = HibernateCF.getSessionFactory(classes);
 	
 	@RequestMapping("/test")
 	public String test (HttpServletRequest request) {
@@ -31,25 +32,25 @@ public class testController {
 	@RequestMapping("/getAll")
 	@ResponseBody()
 	public String getAll() {
-		Session 
+		Session session = sessionFactory.openSession(); 
 		
 
 		@SuppressWarnings("unchecked")
-		List<modelExample> pList = session.createQuery("from modelExample").list();
-
+		List<Admin> pList = session.createQuery("from admins").list();
+		session.close();
 		return "this is from getAll - modelExample " + pList.toString();
 	}
 
 	@RequestMapping("/getById")
 	//@ResponseBody()
 	public String getById(HttpServletRequest request, Model model) {
+		Session session = sessionFactory.openSession(); 
 		
-		Session session = HibernateCF.getSessionFactory().openSession();
 		
 		int id = Integer.parseInt(request.getParameter("id"));
-		modelExample p = session.get(modelExample.class, id);
-		model.addAttribute("p", p);
-		
+		Admin admin = session.get(Admin.class, id);
+		model.addAttribute("admin", admin);
+		session.close();
 		return "modelExampleDisplayInfo";
 		//return "this is from getById - modelExample :" + p.toString();
 	}
@@ -57,10 +58,10 @@ public class testController {
 	@RequestMapping("/add")
 	@ResponseBody()
 	public String add(HttpServletRequest request) {
+		Session session = sessionFactory.openSession(); 
+		
 
-		Session session = HibernateCF.getSessionFactory().openSession();
-
-		modelExample prog = new modelExample();
+		Admin prog = new Admin();
 		prog.setName(request.getParameter("name"));
 		prog.setNote(request.getParameter("note"));
 
