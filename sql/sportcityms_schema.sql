@@ -22,6 +22,16 @@ CREATE TABLE Admin (
   FOREIGN KEY (user_id) REFERENCES User(id)
 );
 
+
+
+CREATE TABLE Facility (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  location VARCHAR(255) NOT NULL,
+  capacity INT NOT NULL
+);
+
+
 CREATE TABLE Booking (
   id INT AUTO_INCREMENT PRIMARY KEY,
   customer_id INT NOT NULL,
@@ -30,13 +40,6 @@ CREATE TABLE Booking (
   end_date DATE NOT NULL,
   FOREIGN KEY (customer_id) REFERENCES Customer(id),
   FOREIGN KEY (facility_id) REFERENCES Facility(id)
-);
-
-CREATE TABLE Facility (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  location VARCHAR(255) NOT NULL,
-  capacity INT NOT NULL
 );
 
 CREATE TABLE Event (
