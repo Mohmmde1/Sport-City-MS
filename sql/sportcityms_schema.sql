@@ -69,3 +69,11 @@ CREATE TABLE Equipment (
   facility_id INT NOT NULL,
   FOREIGN KEY (facility_id) REFERENCES Facility(id)
 );
+
+CREATE TABLE Feedback (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  message TEXT NOT NULL,
+  email VARCHAR(255) NOT NULL
+);
+
