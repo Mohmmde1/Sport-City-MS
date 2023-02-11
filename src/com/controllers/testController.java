@@ -1,22 +1,27 @@
 package com.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.models.modelExample;
+import com.models.Admin;
 import dbUtil.HibernateCF;
 
 
 /* You can use the following controller as a reference on how to use database operations with Hibernate */
 @Controller
 public class testController {
+	ArrayList<Class> classes = {Admin.class};
+	SessionFactory session = HibernateCF.getSessionFactory(classes);
+	
 	@RequestMapping("/test")
 	public String test (HttpServletRequest request) {
 		
@@ -26,8 +31,8 @@ public class testController {
 	@RequestMapping("/getAll")
 	@ResponseBody()
 	public String getAll() {
-
-		Session session = HibernateCF.getSessionFactory().openSession();
+		Session 
+		
 
 		@SuppressWarnings("unchecked")
 		List<modelExample> pList = session.createQuery("from modelExample").list();

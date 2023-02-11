@@ -1,7 +1,7 @@
 CREATE DATABASE SportCityMS;
 USE SportCityMS;
 
-CREATE TABLE User (
+CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
@@ -10,13 +10,13 @@ CREATE TABLE User (
   phone_number VARCHAR(15) NOT NULL
 );
 
-CREATE TABLE Customer (
+CREATE TABLE customers (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES User(id)
 );
 
-CREATE TABLE Admin (
+CREATE TABLE admins (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES User(id)
@@ -24,7 +24,7 @@ CREATE TABLE Admin (
 
 
 
-CREATE TABLE Facility (
+CREATE TABLE facilities (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   location VARCHAR(255) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE Facility (
 );
 
 
-CREATE TABLE Booking (
+CREATE TABLE bookings (
   id INT AUTO_INCREMENT PRIMARY KEY,
   customer_id INT NOT NULL,
   facility_id INT NOT NULL,
@@ -42,28 +42,28 @@ CREATE TABLE Booking (
   FOREIGN KEY (facility_id) REFERENCES Facility(id)
 );
 
-CREATE TABLE Event (
+CREATE TABLE events (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   start_date DATE NOT NULL,
   end_date DATE NOT NULL
 );
 
-CREATE TABLE Report (
+CREATE TABLE reports (
   id INT AUTO_INCREMENT PRIMARY KEY,
   report TEXT NOT NULL,
   name VARCHAR(255) NOT NULL,
   status VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Employee (
+CREATE TABLE employees (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   birth_date DATE NOT NULL
 );
 
-CREATE TABLE Equipment (
+CREATE TABLE equipments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   details TEXT NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE Equipment (
   FOREIGN KEY (facility_id) REFERENCES Facility(id)
 );
 
-CREATE TABLE Feedback (
+CREATE TABLE feedbacks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   message TEXT NOT NULL,

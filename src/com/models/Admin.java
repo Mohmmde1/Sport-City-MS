@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-@Table(name="admin")
+@Table(name="admins")
 public class Admin {
 	@Id
 	@Column(name="id")
