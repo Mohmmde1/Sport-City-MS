@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.models.Admin;
 import com.models.Equipment;
 import com.models.Facility;
 
@@ -83,6 +82,41 @@ public class EquipmentsController {
 		
 		response.sendRedirect("manage");
 		
-		return "equipAcq";
+		return "landing";
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+		Session session = sessionFactory.openSession();
+		
+		Equipment equipment = session.get(Equipment.class, Integer.parseInt(request.getParameter("id")));
+		
+		session.beginTransaction();
+		session.delete(equipment);
+		session.getTransaction().commit();
+		session.close();
+		
+		response.sendRedirect("manage");
+
+		return "landing";
+	}
+	
+	@RequestMapping("/update")
+	public String update(HttpServletResponse response, HttpServletRequest request) throws IOException {
+
+		Session session = sessionFactory.openSession();
+
+		Equipment equipment = session.get(Equipment.class, Integer.parseInt(request.getParameter("id")));
+		equipment.setStatus(request.getParameter("status"));
+
+		session.beginTransaction();
+		session.update(equipment);
+		session.getTransaction().commit();
+		session.close();
+		
+		response.sendRedirect("manage");
+
+		return "landing";
 	}
 }

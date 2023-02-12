@@ -16,8 +16,13 @@
 <body>
 	<div class="container text-center">
 		<h1>Manage Equipments</h1>
+		<div class="container d-flex flex-row-reverse">
+			<form action="add" method="GET">
+				<input class="btn btn-success" type="submit" value="Add New Equipment" />
+			</form>
+		</div>
 		<br>
-		<table class="table table-striped text-center">
+		<table class="table table-bordered table-striped text-center">
 			<thead class="table-dark">
 				<tr>
 					<th scope="col">#</th>
@@ -35,20 +40,31 @@
 						<td>${e.name }</td>
 						<td>${e.status }</td>
 						<td>
-							<button class="btn btn-outline-dark">Action</button>
+							<form action="update" method="POST">
+								<select class="form-select" name="status" required>
+									<option value="">Select status...</option>
+									<option value="Deployed">Deployed</option>
+									<option value="In repair">In repair</option>
+									<option value="Broken">Broken</option>
+									<input name="id" type="hidden" value="${e.id }"> <br>
+									<input class="btn btn-primary btn-sm" type="submit" value="Update Equipment Status" />
+								</select>
+							</form>
+							
+							<br>
+							
+							<form action="delete" method="POST">
+								<input name="id" type="hidden" value="${e.id }">
+								<input class="btn btn-outline-danger" type="submit" value="Delete Equipment" />
+							</form>
 						</td>
 					</tr>
 
-				</c:forEach>				
+				</c:forEach>
 			</tbody>
-			
-		</table>
-		<div class="container d-flex flex-row-reverse">
-			<form action="add" method="GET">
-				<input class="btn btn-success" type="submit" value="New Equipment" />
-			</form>
-		</div>
 
+		</table>
+		<br><br>
 	</div>
 </body>
 </html>
