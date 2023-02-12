@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,59 +28,23 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Football Field</td>
-					<td>Soccer Goal</td>
-					<td>On repair</td>
-					<td>
-						<button class="btn btn-outline-dark">Action</button>
-					</td>
-				</tr>
+				<c:forEach var="e" items="${equipmentsList }" varStatus="loop">
+					<tr>
+						<th scope="row">${loop.index + 1 }</th>
+						<td>${e.facility.name }</td>
+						<td>${e.name }</td>
+						<td>${e.status }</td>
+						<td>
+							<button class="btn btn-outline-dark">Action</button>
+						</td>
+					</tr>
 
-				<tr>
-					<th scope="row">2</th>
-					<td>Gym</td>
-					<td>Adjustable Bench</td>
-					<td>In use</td>
-					<td>
-						<button class="btn btn-outline-dark">Action</button>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Swimming Pool</td>
-					<td>Heater</td>
-					<td>Broken</td>
-					<td>
-						<button class="btn btn-outline-dark">Action</button>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">4</th>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<th scope="row">5</th>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<th scope="row">6</th>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-				</tr>
+				</c:forEach>				
 			</tbody>
+			
 		</table>
 		<div class="container d-flex flex-row-reverse">
-			<form action="equipAcq.jsp" method="GET">
+			<form action="add" method="GET">
 				<input class="btn btn-success" type="submit" value="New Equipment" />
 			</form>
 		</div>

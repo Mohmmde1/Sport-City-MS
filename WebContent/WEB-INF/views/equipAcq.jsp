@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@ td {
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center">
-        <form action="equipAcq.jsp" method="POST">
+        <form action="add" method="POST">
             <table>
                 <tr>
                     <th class="text-center" colspan="2">
@@ -26,12 +27,12 @@ td {
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <label for="faciltiy">Targeted Faciltiy</label> <br>
-                        <select class="form-select" id="faciltiy" name="facility" style="width:500px; height: 40px;">
-                            <option selected>Choose a facility...</option>
-                            <option value="1">Gym</option>
-                            <option value="2">Swimming Pool</option>
-                            <option value="3">Soccer Field</option>
+                        <label for="faciltiy">Targeted Facility</label> <br>
+                        <select class="form-select" id="faciltiy" name="facility" style="width:500px; height: 40px;" required>
+                            <option value="">Choose a facility...</option>
+                            <c:forEach var="f" items="${facilitiesList }">
+                            	<option value="${f.id}"> ${f.name} </option>
+                            </c:forEach>
                         </select>
                         <br>
                     </td>
@@ -50,16 +51,12 @@ td {
                 <tr>
                     <td>
                         <label for="provider">Provider Name</label> <br>
-                        <select class="form-select" name="provider" id="provider">
-                            <option selected>Choose a provider...</option>
-                            <option value="1">homegym</option>
-                            <option value="2">providerx</option>
-                        </select>
+                        <input class="form-control" id="provider" name="provider" type="text">                            
                         <br>
                     </td>
                     <td>
                         <label for="email">Provider Email</label>
-                        <input class="form-control" id="email" name="email" type="email" disabled> <br>
+                        <input class="form-control" id="email" name="email" type="email"> <br>
                     </td>
                 </tr>
                 <tr>
