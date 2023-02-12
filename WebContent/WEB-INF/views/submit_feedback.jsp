@@ -17,27 +17,28 @@
 
         <h2 >Feedback</h2>
     </div>
-    <form>
+    <form action="submit" method="post">
       <div class="form-group">
         <label>Full Name</label><br>
-        <input type="text" class="" />
+        <input type="text" class="" name="name"/>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label><br>
         <input
           type="email"
           class=""
-          id="exampleInputEmail1"
+          name="email"
+          id="email"
           aria-describedby="emailHelp"
           
         />
       </div>
       <div class="form-group">
         <label for="message">Message</label><br />
-        <textarea name="" id="message" ></textarea>
+        <textarea name="message" id="message" ></textarea>
       </div>
 
-      <button type="submit" class="btn btn-primary">Send</button>
+      <input type="submit" class="btn btn-primary">
     </form>
   </div>
 </html>
