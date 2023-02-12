@@ -26,6 +26,7 @@ public class FeedbackController {
 		return "submit_feedback";
 	}
 
+	
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	@ResponseBody
 	public String submit(HttpServletRequest request, HttpServletResponse response) {
