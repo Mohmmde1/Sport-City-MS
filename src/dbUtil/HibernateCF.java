@@ -1,6 +1,6 @@
 package dbUtil;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -16,21 +16,10 @@ public class HibernateCF {
 			Configuration config = new Configuration();
 			config.configure("hibernate.cfg.xml");
 
-			List<Class> classes = new ArrayList<>();
-			classes.add(User.class);
-			classes.add(Admin.class);
-			classes.add(Booking.class);
-			classes.add(Customer.class);
-			classes.add(Employee.class);
-			classes.add(Equipment.class);
-			classes.add(Event.class);
-			classes.add(Facility.class);
-			classes.add(Feedback.class);
-			classes.add(Report.class);
+			List<Class<?>> classes = Arrays.asList(User.class, Admin.class, Booking.class, Customer.class,
+					Employee.class, Equipment.class, Event.class, Facility.class, Feedback.class, Report.class);
 
-			for (Class c : classes) {
-				config.addAnnotatedClass(c);
-			}
+			classes.forEach(config::addAnnotatedClass);
 
 			sessionFactory = config.buildSessionFactory();
 		}
