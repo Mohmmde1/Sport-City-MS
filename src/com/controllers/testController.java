@@ -29,70 +29,90 @@ public class testController {
 	@RequestMapping("/getAll")
 	@ResponseBody
 	public String getAll() {
-		Session session = sessionFactory.openSession();
-
-		@SuppressWarnings("unchecked")
-		List<Admin> adminList = session.createQuery("from Admin").list();
-		session.close();
-		return "this is from getAll - admin " + adminList.toString();
+		try (Session session = sessionFactory.openSession()) {
+			List<Admin> adminList = session.createQuery("from Admin").list();
+			return "this is from getAll - admin " + adminList.toString();
+		} catch (Exception e) {
+			// log the error or handle it in some other way
+			e.printStackTrace();
+			return "An error occurred while trying to retrieve the admin list.";
+		}
 	}
 
 	@RequestMapping("/getById")
+	@ResponseBody
 	public String getById(HttpServletRequest request, Model model) {
-		Session session = sessionFactory.openSession();
-
 		int id = Integer.parseInt(request.getParameter("id"));
-		Admin admin = session.get(Admin.class, id);
-		model.addAttribute("admin", admin);
-		session.close();
-		return "modelExampleDisplayInfo";
+		try (Session session = sessionFactory.openSession()) {
+			Admin admin = session.get(Admin.class, id);
+			model.addAttribute("admin", admin);
+			return "this is from getById - admin " + admin.toString();
+		} catch (Exception e) {
+			// log the error or handle it in some other way
+			e.printStackTrace();
+			return "An error occurred while trying to retrieve the admin list.";
+		}
 	}
 
 	@RequestMapping("/add")
 	@ResponseBody
 	public String add(HttpServletRequest request) {
-		Session session = sessionFactory.openSession();
 
 		Admin admin = new Admin();
+
 		admin.setId(Integer.parseInt(request.getParameter("id")));
 
-		session.beginTransaction();
-		session.save(admin);
-		session.getTransaction().commit();
-		session.close();
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			session.save(admin);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// log the error or handle it in some other way
+			e.printStackTrace();
+			return "An error occurred while trying to retrieve the admin.";
+		}
 
-		return "this is from add - modelExample";
+		return "this is from add - admin " + admin.toString();
 	}
 
 	@RequestMapping("/update")
 	@ResponseBody
 	public String update(HttpServletRequest request) {
 
-		Session session = sessionFactory.openSession();
+		Admin admin = new Admin();
 
-		Admin admin = session.get(Admin.class, Integer.parseInt(request.getParameter("id")));
 		admin.setId(Integer.parseInt(request.getParameter("id")));
 
-		session.beginTransaction();
-		session.update(admin);
-		session.getTransaction().commit();
-		session.close();
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			session.save(admin);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// log the error or handle it in some other way
+			e.printStackTrace();
+			return "An error occurred while trying to retrieve the admin.";
+		}
 
-		return "this is from add - modelExample";
+		return "this is from update - modelExample";
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody()
 	public String delete(HttpServletRequest request) {
 
-		Session session = sessionFactory.openSession();
+		Admin admin = new Admin();
 
-		Admin admin = session.get(Admin.class, Integer.parseInt(request.getParameter("id")));
+		admin.setId(Integer.parseInt(request.getParameter("id")));
 
-		session.beginTransaction();
-		session.delete(admin);
-		session.getTransaction().commit();
-		session.close();
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			session.delete(admin);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			// log the error or handle it in some other way
+			e.printStackTrace();
+			return "An error occurred while trying to retrieve the admin.";
+		}
 
 		return "this is from delete - modelExample : " + admin.toString() + " has been deleted";
 	}
