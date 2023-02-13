@@ -89,7 +89,9 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String toString() {
-        return "User [id=" + this.id + ", username=" + this.username + ", password=" + this.password + ", fname=" + this.fname + ", lname=" + this.lname + ", phoneNumber=" + this.phoneNumber + "]";
-    }
+    @Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", fname=" + fname + ", lname="
+				+ lname + ", phoneNumber=" + phoneNumber + ", dob=" + dob + "]";
+	}
 }
