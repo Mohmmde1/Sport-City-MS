@@ -17,18 +17,19 @@ import dbUtil.HibernateCF;
 
 /* You can use the following controller as a reference on how to use database operations with Hibernate */
 @Controller()
-@RequestMapping("/feedback")
-public class FeedbackController {
+@RequestMapping("/profile")
+public class ProfileController {
 	SessionFactory sessionFactory = HibernateCF.getSessionFactory();
 
 	@RequestMapping("/")
 	public String submit(HttpServletRequest request) {
-		return "submit_feedback";
+		return "manage_profile";
 	}
 
 	
-	@RequestMapping(value = "/submit", method = RequestMethod.POST)
-	public String submit(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String update(HttpServletRequest request, HttpServletResponse response) {
 
 		try (Session session = sessionFactory.openSession();) {
 
@@ -40,8 +41,7 @@ public class FeedbackController {
 			session.beginTransaction();
 			session.save(feedback);
 			session.getTransaction().commit();
-			request.setAttribute("feedback", feedback);
-			return "submit_feedback";
+			return "successfully feedback has been recorded " + feedback;
 		} catch (Exception ex) {
 			return "errorPage";
 		}

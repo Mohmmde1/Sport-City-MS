@@ -21,7 +21,7 @@
           alt="Maxwell Admin"
         />
     </div>
-    <form>
+    <form action="profile/update" method="post">
       <div class="row">
         <div class="col">
           <label>First Name</label><br />
