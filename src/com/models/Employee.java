@@ -23,6 +23,16 @@ public class Employee {
 	
 	@Column(name="birth_date")
 	String birth_date;
+	
+	public Employee() {
+		
+	}
+
+	public Employee(String name, String email, String birth_date) {
+		this.name = name;
+		this.email = email;
+		this.birth_date = birth_date;
+	}
 
 	public int getId() {
 		return id;
