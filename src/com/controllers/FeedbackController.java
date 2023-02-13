@@ -21,14 +21,13 @@ import dbUtil.HibernateCF;
 public class FeedbackController {
 	SessionFactory sessionFactory = HibernateCF.getSessionFactory();
 
-	@RequestMapping("/submit")
+	@RequestMapping("/")
 	public String submit(HttpServletRequest request) {
 		return "submit_feedback";
 	}
 
 	
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
-	@ResponseBody
 	public String submit(HttpServletRequest request, HttpServletResponse response) {
 
 		try (Session session = sessionFactory.openSession();) {
@@ -41,7 +40,8 @@ public class FeedbackController {
 			session.beginTransaction();
 			session.save(feedback);
 			session.getTransaction().commit();
-			return "successfully feedback has been recorded " + feedback;
+			request.setAttribute("feedback", feedback);
+			return "submit_feedback";
 		} catch (Exception ex) {
 			return "errorPage";
 		}

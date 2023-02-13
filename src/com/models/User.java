@@ -29,8 +29,19 @@ public class User {
 
     @Column(name="phone_number")
     String phoneNumber;
+    
+    @Column(name="dob")
+    String dob;
 
-    public int getId() {
+    public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public int getId() {
         return id;
     }
 
@@ -78,7 +89,9 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String toString() {
-        return "User [id=" + this.id + ", username=" + this.username + ", password=" + this.password + ", fname=" + this.fname + ", lname=" + this.lname + ", phoneNumber=" + this.phoneNumber + "]";
-    }
+    @Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", fname=" + fname + ", lname="
+				+ lname + ", phoneNumber=" + phoneNumber + ", dob=" + dob + "]";
+	}
 }
