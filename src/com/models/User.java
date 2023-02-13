@@ -29,8 +29,19 @@ public class User {
 
     @Column(name="phone_number")
     String phoneNumber;
+    
+    @Column(name="dob")
+    String dob;
 
-    public int getId() {
+    public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public int getId() {
         return id;
     }
 
