@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,13 @@
 <body>
 	<div class="container text-center">
 		<h1>Manage Equipments</h1>
+		<div class="container d-flex flex-row-reverse">
+			<form action="add" method="GET">
+				<input class="btn btn-success" type="submit" value="Add New Equipment" />
+			</form>
+		</div>
 		<br>
-		<table class="table table-striped text-center">
+		<table class="table table-bordered table-striped text-center">
 			<thead class="table-dark">
 				<tr>
 					<th scope="col">#</th>
@@ -27,63 +33,38 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Football Field</td>
-					<td>Soccer Goal</td>
-					<td>On repair</td>
-					<td>
-						<button class="btn btn-outline-dark">Action</button>
-					</td>
-				</tr>
+				<c:forEach var="e" items="${equipmentsList }" varStatus="loop">
+					<tr>
+						<th scope="row">${loop.index + 1 }</th>
+						<td>${e.facility.name }</td>
+						<td>${e.name }</td>
+						<td>${e.status }</td>
+						<td>
+							<form action="update" method="POST">
+								<select class="form-select" name="status" required>
+									<option value="">Select status...</option>
+									<option value="Deployed">Deployed</option>
+									<option value="In repair">In repair</option>
+									<option value="Broken">Broken</option>
+									<input name="id" type="hidden" value="${e.id }"> <br>
+									<input class="btn btn-primary btn-sm" type="submit" value="Update Equipment Status" />
+								</select>
+							</form>
+							
+							<br>
+							
+							<form action="delete" method="POST">
+								<input name="id" type="hidden" value="${e.id }">
+								<input class="btn btn-outline-danger" type="submit" value="Delete Equipment" />
+							</form>
+						</td>
+					</tr>
 
-				<tr>
-					<th scope="row">2</th>
-					<td>Gym</td>
-					<td>Adjustable Bench</td>
-					<td>In use</td>
-					<td>
-						<button class="btn btn-outline-dark">Action</button>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Swimming Pool</td>
-					<td>Heater</td>
-					<td>Broken</td>
-					<td>
-						<button class="btn btn-outline-dark">Action</button>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">4</th>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<th scope="row">5</th>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<th scope="row">6</th>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-				</tr>
+				</c:forEach>
 			</tbody>
-		</table>
-		<div class="container d-flex flex-row-reverse">
-			<form action="equipAcq.jsp" method="GET">
-				<input class="btn btn-success" type="submit" value="New Equipment" />
-			</form>
-		</div>
 
+		</table>
+		<br><br>
 	</div>
 </body>
 </html>
