@@ -30,8 +30,7 @@
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">
 					<p>
-						<img src="<c:url value="/resources/images/logo.png" />"
-							alt="sportscorner-logo"> <span
+						<img src='<c:url value="/resources/images/logo.png" />'	alt="sportscorner-logo"> <span
 							class="fw-bold fs-2 mx-2 text-white"> Sportscorner </span>
 					</p>
 				</a>

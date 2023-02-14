@@ -32,7 +32,7 @@
         <div class="row d-flex align-items-center justify-content-center w-100">
           <a class="navbar-brand justify-content-start col-5 col me-0" href="#">
             <p>
-              <img src="images/logo.png" alt="sportscorner-logo">
+              <img src='<c:url value="/resources/images/logo.png" />' alt="sportscorner-logo">
               <span class="fw-bold fs-2 mx-2 text-dark">
                 Sportscorner
               </span>
