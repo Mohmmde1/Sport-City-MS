@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,7 +77,7 @@ public class AuthController {
 			throw ex;
 		} finally {
 			session.close();
-			return "this is from add - modelExample";
+			return "landing";
 		}
 	}
 
@@ -95,14 +97,30 @@ public class AuthController {
 			User user = (User) session.createQuery("from User where username = :username")
 					.setParameter("username", username).uniqueResult();
 
+			System.out.println(user);
 			if (user == null || !PasswordUtils.isPasswordMatch(password, user.getPassword())) {
 				return "Invalid username or password";
 			} else {
-				// Implement login logic here, for example setting a cookie or a session
-				// attribute
-				// ...
-				return "Login successful";
+				Customer customer = (Customer) session.createQuery("from Customer where user_id = :user_id")
+						.setParameter("user_id", user.getId()).uniqueResult();
+				
+				Admin admin = (Admin) session.createQuery("from Admin where user_id = :user_id")
+						.setParameter("user_id", user.getId()).uniqueResult();
+				
+				if (customer != null) {
+					customer.getUser().setPassword(null);
+					request.getSession().setAttribute("customer", customer);					
+				} else if (admin != null) {
+					admin.getUser().setPassword(null);
+					request.getSession().setAttribute("admin", admin);		
+				}
+
+				System.out.println(customer);
+				System.out.println(admin);
+				return "landing";
 			}
+		} catch (Exception ex) {
+			throw ex;
 		} finally {
 			session.close();
 		}

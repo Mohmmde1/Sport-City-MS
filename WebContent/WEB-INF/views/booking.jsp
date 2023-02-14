@@ -40,8 +40,8 @@
     <div class="container-fluid">
       <form class="section row">
         <div class="mb-3">
-          <label for="username" class="form-label">Facility</label>
-          <select class="form-select" aria-label="Default select example">
+          <label for="facility" class="form-label">Facility</label>
+          <select class="form-select" name="facility_id" aria-label="Default select example">
             <option selected>select facility</option>
             <option value="1">Football field</option>
             <option value="2">Basketball court</option>
@@ -49,8 +49,8 @@
           </select>
         </div>
         <div class="mb-3">
-          <label for="username" class="form-label">Equipment</label>
-          <select class="form-select" aria-label="Default select example">
+          <label for="equipment" class="form-label">Equipment</label>
+          <select class="form-select" name="equipment_id" aria-label="Default select example">
             <option selected>select equipment</option>
             <option value="1">Goalkeeper machine</option>
             <option value="2">obstacles</option>
@@ -65,20 +65,8 @@
           <input type="datetime-local" class="form-control light-border" id="to">
         </div>
         <div class="mb-3 col-6">
-          <label for="card" class="form-label">Card number</label>
-          <input type="text" class="form-control light-border" id="card">
-        </div>
-        <div class="mb-3 col-6">
-          <label for="holder" class="form-label">Card holder</label>
-          <input type="text" class="form-control light-border" id="holder">
-        </div>
-        <div class="mb-3 col-2">
-          <label for="expiration" class="form-label">Expiration</label>
-          <input type="date" class="form-control light-border" id="expiration">
-        </div>
-        <div class="mb-3 col-2">
-          <label for="holder" class="form-label">CV</label>
-          <input type="number" class="form-control light-border" id="holder">
+          <label for="price" class="form-label">Price</label>
+          <input type="text" class="form-control light-border" id="price" readonly>
         </div>
       </form>
       <a href="history.jsp" class="btn btn-success col-1">

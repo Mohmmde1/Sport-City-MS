@@ -24,6 +24,9 @@ public class Facility {
 	@Column(name="capacity")
 	int capacity;
 
+	@Column(name="price")
+	double price;
+	
 	public int getId() {
 		return id;
 	}
@@ -54,6 +57,14 @@ public class Facility {
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
 	public String toString() {
