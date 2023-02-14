@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.models.Admin;
 import com.models.Booking;
 import com.models.Customer;
+import com.models.Equipment;
+import com.models.Facility;
 
 import dbUtil.HibernateCF;
 
@@ -48,8 +50,14 @@ public class BookingController {
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
-	public String bookingForm() {
+	public String bookingForm(Model model) {
 		try (Session session = sessionFactory.openSession();) {
+			List<Facility> facilityList = session.createQuery("from Facility").list();
+			List<Equipment> equipmentsList = session.createQuery("from Equipment").list();
+			
+			model.addAttribute("facilityList", facilityList);
+			model.addAttribute("equipmentsList", equipmentsList);
+			
 			return "booking";
 		} catch (Exception ex) {
 			return "errorPage";
@@ -60,14 +68,24 @@ public class BookingController {
 	public String submit(HttpServletRequest request, HttpServletResponse response) {
 
 		try (Session session = sessionFactory.openSession();) {
-
+			Customer customer  = (Customer) request.getSession().getAttribute("customer");
+			Admin admin = (Admin)request.getSession().getAttribute("admin");
+			
 			Booking booking = new Booking();
+			
+//			booking.setFacility(request.getParameter("facility"));
+//			booking.setEquipment(request.getParameter("equipment"));
+			
+			if(customer != null) {
+				booking.setCustomer(customer);
+			}else if(admin != null) { /** nothing **/ }
+			else { return "errorPage"; }
 
 			session.beginTransaction();
 			session.save(booking);
 			session.getTransaction().commit();
-			request.setAttribute("feedback", booking);
-			return "submit_feedback";
+			
+			return "history";
 		} catch (Exception ex) {
 			return "errorPage";
 		}
