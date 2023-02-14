@@ -15,6 +15,7 @@
 </head>
 <body>
 	<div class="container text-center">
+	<br>
 		<h1>Manage Events</h1>
 		<br>
 		<table class="table table-striped text-center">
@@ -23,64 +24,26 @@
 					<th scope="col">Event</th>
 					<th scope="col">From</th>
 					<th scope="col">To</th>
-					<th scope="col">Discount</th>
 					<th scope="col">Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Eid Al-Adha</td>
-					<td>11/03/2022</td>
-					<td>20/03/2022</td>
-					<td>15%</td>
-					<td>
-						<button class="btn btn-outline-dark">Action</button>
-					</td>
-				</tr>
+				<c:forEach var="e" items="${eventsList }">
+					<tr>
+						<td>${e.name }</td>
+						<td>${e.startDate }</td>
+						<td>${e.endDate }</td>
+						<td>
+							<form action="delete" method="POST">
+								<input name="id" type="hidden" value="${e.id }">
+								<input class="btn btn-outline-danger" type="submit" value="End Event" />
+							</form>
+						</td>
+					</tr>
 
-				<tr>
-					<td>World Cup</td>
-					<td>10/07/2022</td>
-					<td>30/07/2022</td>
-					<td>15%</td>
-					<td>
-						<button class="btn btn-outline-dark">Action</button>
-					</td>
-				</tr>
-				<tr>
-					<td>Eid Al-Fitr</td>
-					<td>10/06/2022</td>
-					<td>30/06/2022</td>
-					<td>10%</td>
-					<td>
-						<button class="btn btn-outline-dark">Action</button>
-					</td>
-				</tr>
-				<tr>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-				</tr>
-				<tr>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
-					<td>...</td>
+				</c:forEach>
 			</tbody>
 		</table>
-		<div class="container d-flex flex-row-reverse">
-			<button class="btn btn-success">New Event</button>
-		</div>
 	</div>
 </body>
 </html>
