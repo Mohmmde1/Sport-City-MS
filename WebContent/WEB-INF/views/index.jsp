@@ -47,7 +47,7 @@
 						<a class="text-white nav-link" href="profile/getById?id=2">Profile</a>
 						<a class="text-white nav-link" href="events/manage">Events</a>
 						<a class="text-white nav-link" href="equipments/manage">Equipment</a>
-						<a class="text-white nav-link" href="booking.jsp">Booking</a>
+						<a class="text-white nav-link" href="booking/history">Booking</a>
 						<a class="text-white nav-link" href="report">Report</a>
 						<a class="text-white nav-link" href="feedback/">Feedback</a>
 						<a class="text-white nav-link" href="employees/manage">Recruit</a>
