@@ -43,7 +43,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="text-white nav-link" href="manage_facilities.jsp">Facilities</a>
+						<a class="text-white nav-link" href="facility/">Facilities</a>
 						<a class="text-white nav-link" href="profile/getById?id=2">Profile</a>
 						<a class="text-white nav-link" href="event.jsp">Events</a>
 						<a class="text-white nav-link" href="equipments/manage">Equipment</a>

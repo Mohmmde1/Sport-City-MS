@@ -38,6 +38,7 @@ public class FacilityController {
 				json += "\"name\": \"" + facility.getName() + "\", ";
 				json += "\"location\": \"" + facility.getLocation() + "\", ";
 				json += "\"capacity\": " + facility.getCapacity() + ", ";
+				json += "\"price\": " + facility.getPrice() + ", ";
 				json += "\"person\": \"" + facility.getEmployee().getName() + "\", ";
 				json += "\"status\": \"" + facility.getStatus() + "\"}, ";
 			}
@@ -64,6 +65,7 @@ public class FacilityController {
 			facility.setCapacity(Integer.parseInt(request.getParameter("capacity")));
 			facility.setLocation(request.getParameter("location"));
 			facility.setStatus(request.getParameter("status"));
+			facility.setPrice(Integer.parseInt(request.getParameter("price")));
 			Employee employee = session.get(Employee.class, Integer.parseInt(request.getParameter("selectedEmployee")));
 			facility.setEmployee(employee);
 

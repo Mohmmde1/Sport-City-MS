@@ -24,7 +24,7 @@
 			<label>Facilitiy Type</label>
 		</div>
 		<select class="dropdown first" name="selectedFacility">
-			<option selected> select the faculity </option>
+			<option selected>select the faculity</option>
 			<c:forEach var="f" items="${facilitiesList }">
 				<option value="${f.id}">${f.name}</option>
 			</c:forEach>
@@ -36,10 +36,10 @@
 			<label>Facilitiy Status</label>
 		</div>
 		<select class="dropdown second " name="status">
-		<option selected >...</option>
+			<option selected>...</option>
 			<option value="Available">Available</option>
 			<option value="Booked">Booked</option>
-			
+
 		</select>
 	</div>
 
@@ -50,10 +50,10 @@
 				<label>Person in Charge</label>
 			</div>
 			<select class="dropdown third" name="selectedEmployee">
-			<option selected >...</option>
+				<option selected>...</option>
 				<c:forEach var="e" items="${employeesList }">
-				<option value="${e.id}">${e.name}</option>
-			</c:forEach>
+					<option value="${e.id}">${e.name}</option>
+				</c:forEach>
 			</select>
 		</div>
 
@@ -77,7 +77,15 @@
 				<input type="text" class="fifth" name="capacity">
 			</div>
 		</div>
-		<div class="col"></div>
+		<div class="col">
+			<div class="form-label">
+				<label>Price</label>
+			</div>
+			<div class="date">
+
+				<input type="text" class="sixth" name="price">
+			</div>
+		</div>
 
 	</div>
 	<div class="save-button">
@@ -86,7 +94,7 @@
 
 </form>
 <script>
-var facilities = JSON.parse('${json}');
+	var facilities = JSON.parse('${json}');
 	if (facilities) {
 		console.log("HI");
 		console.log(facilities);
@@ -100,15 +108,16 @@ var facilities = JSON.parse('${json}');
 	const selectPerson = document.querySelector(".third");
 	const selectLocation = document.querySelector(".forth");
 	const selectCapacity = document.querySelector(".fifth");
-	
+	const selectPrice = document.querySelector(".sixth");
 
 	selectFacility.addEventListener("change", function() {
 		const selectedFacility = selectFacility.value;
 		var facility = facilities[selectedFacility];
 		selectStatus.value = facility.status;
-		selectPerson.value = facility.person; 
+		selectPerson.value = facility.person;
 		selectLocation.value = facility.location;
 		selectCapacity.value = facility.capacity;
+		selectPrice.value = facility.price;
 
 	});
 	function submitForm() {

@@ -27,6 +27,15 @@ public class Facility {
 	int capacity;
 	@Column(name = "status")
 	private String status;
+	@Column(name = "price")
+	int price;
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
