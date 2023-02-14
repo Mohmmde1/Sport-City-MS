@@ -1,7 +1,6 @@
 package com.controllers;
 
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,10 +10,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.models.Admin;
@@ -36,8 +33,7 @@ public class AuthController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	@ResponseBody
-	public String register(HttpServletRequest request, HttpServletResponse response) {
+	public String register(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
@@ -75,7 +71,8 @@ public class AuthController {
 			throw ex;
 		} finally {
 			session.close();
-			return "this is from add - modelExample";
+			response.sendRedirect("login");
+			return "login";
 		}
 	}
 
@@ -85,7 +82,6 @@ public class AuthController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	@ResponseBody
 	public String login(HttpServletRequest request, HttpServletResponse response) {
 		Session session = sessionFactory.openSession();
 		try {
@@ -101,7 +97,7 @@ public class AuthController {
 				// Implement login logic here, for example setting a cookie or a session
 				// attribute
 				// ...
-				return "Login successful";
+				return "index";
 			}
 		} finally {
 			session.close();
