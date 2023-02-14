@@ -1,8 +1,5 @@
 USE scm;
 
-ALTER TABLE facilities
-ADD COLUMN price double;
-
 ALTER TABLE bookings
 MODIFY COLUMN start_date timestamp,
 MODIFY COLUMN end_date timestamp;
