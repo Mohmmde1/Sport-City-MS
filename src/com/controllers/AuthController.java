@@ -1,7 +1,6 @@
 package com.controllers;
 
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,8 +9,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.models.Admin;
 import com.models.Customer;
@@ -32,7 +33,7 @@ public class AuthController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(HttpServletRequest request, HttpServletResponse response) {
+	public String register(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
 		try {
@@ -70,7 +71,8 @@ public class AuthController {
 			throw ex;
 		} finally {
 			session.close();
-			return "landing";
+			response.sendRedirect("login");
+			return "login";
 		}
 	}
 
@@ -113,7 +115,8 @@ public class AuthController {
 
 				System.out.println(customer);
 				System.out.println(admin);
-				return "landing";
+
+				return "index";
 			}
 		} catch (Exception ex) {
 			throw ex;

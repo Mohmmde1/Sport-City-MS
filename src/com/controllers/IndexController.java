@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-	@RequestMapping("/") 
+	@RequestMapping("") 
+
     public String home(Model model) {
-        return "landing";
+        return "login";
     }
 }

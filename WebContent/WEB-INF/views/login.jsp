@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +19,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="css/main.css">
+<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 </head>
 
 <body class="bg-black">
@@ -30,7 +31,8 @@
 					<a class="navbar-brand justify-content-start col-5 col me-0"
 						href="#">
 						<p>
-							<img src="images/logo.png" alt="sportscorner-logo"> <span
+							<img src='<c:url value="/resources/images/logo.png" />'
+								alt="sportscorner-logo"> <span
 								class="fw-bold fs-2 mx-2 text-white"> Sportscorner </span>
 						</p>
 					</a>
@@ -59,8 +61,9 @@
 				<p class="text-white">
 					haven't registered yet? <a href="register">click here</a>
 				</p>
-				<input type="submit" class="btn btn-outline-secondary"
-					value="Login ">
+				<div class="d-grid gap-2">
+					<input type="submit" class="btn btn-success" value="Login">
+				</div>
 			</div>
 		</form>
 	</div>

@@ -1,9 +1,7 @@
 @charset "UTF-8";
 
 body{
-    background: url(
-        "../images/feedback.jpeg"
-        );
+    background: url("../images/feedback.jpeg");
         background-repeat: none;
         background-size: cover;
         
