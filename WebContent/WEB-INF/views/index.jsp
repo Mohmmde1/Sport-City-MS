@@ -48,7 +48,7 @@
 						<a class="text-white nav-link" href="event.jsp">Events</a>
 						<a class="text-white nav-link" href="equipments/manage">Equipment</a>
 						<a class="text-white nav-link" href="booking.jsp">Booking</a>
-						<a class="text-white nav-link" href="genrate_report.jsp">Report</a>
+						<a class="text-white nav-link" href="report">Report</a>
 						<a class="text-white nav-link" href="feedback/">Feedback</a>
 						<a class="text-white nav-link" href="employees/manage">Recruit</a>
 					</div>
