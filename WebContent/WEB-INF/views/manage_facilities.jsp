@@ -62,7 +62,7 @@
 			<div class="form-label">
 				<label>Location</label>
 			</div>
-			<input type="text" name="location" class="dropdown forth">
+			<input type="text" name="location" class="dropdown forth" value="">
 		</div>
 
 	</div>
@@ -94,15 +94,18 @@
 
 </form>
 <script>
-	var facilities = JSON.parse('${json}');
-	if (facilities) {
-		console.log("HI");
-		console.log(facilities);
+	//Parse the JSON data stored in the 'json' variable
+	const facilities = JSON.parse('${json}');
 
+	// Check if the 'facilities' variable exists and log it to the console
+	if (facilities) {
+		console.log("Facilities loaded successfully:");
+		console.log(facilities);
 	} else {
-		alert("facilityList does not exist in sessionStorage");
+		alert("Error: facility data not found.");
 	}
 
+	// Get references to the select elements in the HTML
 	const selectFacility = document.querySelector(".first");
 	const selectStatus = document.querySelector(".second");
 	const selectPerson = document.querySelector(".third");
@@ -110,18 +113,19 @@
 	const selectCapacity = document.querySelector(".fifth");
 	const selectPrice = document.querySelector(".sixth");
 
+	// Add an event listener to the 'selectFacility' element to update the form data
 	selectFacility.addEventListener("change", function() {
 		const selectedFacility = selectFacility.value;
-		var facility = facilities[selectedFacility];
-		selectStatus.value = facility.status;
+		const facility = facilities[selectedFacility];
 		selectPerson.value = facility.person;
 		selectLocation.value = facility.location;
 		selectCapacity.value = facility.capacity;
 		selectPrice.value = facility.price;
-
 	});
+
+	// Define a function to handle the form submission
 	function submitForm() {
-		alert("The facility info has been updated!");
+		alert("The facility information has been updated!");
 	}
 </script>
 </html>
