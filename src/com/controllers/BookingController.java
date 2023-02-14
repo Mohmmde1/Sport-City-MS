@@ -25,7 +25,7 @@ public class BookingController {
 	SessionFactory sessionFactory = HibernateCF.getSessionFactory();
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping("")
+	@RequestMapping("history")
 	public String history(HttpServletRequest request, Model model) {
 		Session session = sessionFactory.openSession();
 		Customer customer  = (Customer) request.getSession().getAttribute("customer");
@@ -47,6 +47,15 @@ public class BookingController {
 		return "history";
 	}
 
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
+	public String bookingForm() {
+		try (Session session = sessionFactory.openSession();) {
+			return "booking";
+		} catch (Exception ex) {
+			return "errorPage";
+		}
+	}
+	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public String submit(HttpServletRequest request, HttpServletResponse response) {
 

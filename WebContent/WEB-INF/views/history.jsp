@@ -106,7 +106,7 @@
 
 				</tbody>
 			</table>
-			<a href="booking.jsp" class="btn btn-success col-1"> Book now </a>
+			<a href="new" class="btn btn-success col-1"> Book now </a>
 		</div>
 	</div>
 
