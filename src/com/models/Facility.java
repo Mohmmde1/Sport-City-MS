@@ -25,24 +25,17 @@ public class Facility {
 
 	@Column(name = "capacity")
 	int capacity;
+	
 	@Column(name = "status")
 	private String status;
-	@Column(name = "price")
-	int price;
-	public int getPrice() {
-		return price;
-	}
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
+	@Column(name="price")
+	double price;
+	
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
 
-	@Column(name = "from_date")
-	private String fromDate;
 
 	public String getStatus() {
 		return status;
@@ -59,25 +52,6 @@ public class Facility {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-
-	public String getFromDate() {
-		return fromDate;
-	}
-
-	public void setFromDate(String fromDate) {
-		this.fromDate = fromDate;
-	}
-
-	public String getToDate() {
-		return toDate;
-	}
-
-	public void setToDate(String toDate) {
-		this.toDate = toDate;
-	}
-
-	@Column(name = "to_date")
-	private String toDate;
 
 	public int getId() {
 		return id;
@@ -110,7 +84,15 @@ public class Facility {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
-
+	
+	public double getPrice() {
+		return price;
+	}
+	
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
 	public String toString() {
 		return "Facility [id=" + this.id + ", name=" + this.name + ", location=" + this.location + ", capacity="
 				+ this.capacity + "]";

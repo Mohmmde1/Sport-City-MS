@@ -1,4 +1,0 @@
-Use scm;
-
-ALTER TABLE facilities
-ADD COLUMN price INT NOT NULL DEFAULT 100;

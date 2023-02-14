@@ -2,9 +2,12 @@ package com.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,7 +35,7 @@ public class User {
     
     @Column(name="dob")
     String dob;
-
+    
     public String getDob() {
 		return dob;
 	}

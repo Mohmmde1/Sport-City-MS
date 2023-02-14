@@ -7,8 +7,8 @@ import javax.persistence.Table;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name="bookings")
@@ -19,13 +19,17 @@ public class Booking {
 	@Column(name="id")
 	int id;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="customer_id", foreignKey=@ForeignKey(name="fk_customer_id"))
 	Customer customer;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="facility_id", foreignKey=@ForeignKey(name="fk_facility_id"))
 	Facility facility;
+	
+	@OneToOne
+	@JoinColumn(name="equipment_id", foreignKey=@ForeignKey(name="fk_equipment_id"))
+	Equipment equipment;
 	
 	@Column(name="start_date")
 	String startDate;
@@ -56,6 +60,14 @@ public class Booking {
 	public void setFacility(Facility facility) {
 		this.facility = facility;
 	}
+	
+	public Equipment getEquipment() {
+		return equipment;
+	}
+
+	public void setEquipment(Equipment equipment) {
+		this.equipment = equipment ;
+	}
 
 	public String getStartDate() {
 		return startDate;
@@ -71,5 +83,11 @@ public class Booking {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+	
+	@Override
+	public String toString() {
+	return "Booking [id=" + id + ", customer=" + customer + ", facility=" + facility + ", equipment=" + equipment + ", startDate=" + startDate
+	+ ", endDate=" + endDate + "]";
 	}
 }
