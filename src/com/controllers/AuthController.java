@@ -9,15 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.models.Admin;
 import com.models.Customer;
@@ -38,7 +32,6 @@ public class AuthController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	@ResponseBody
 	public String register(HttpServletRequest request, HttpServletResponse response) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
@@ -87,7 +80,6 @@ public class AuthController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	@ResponseBody
 	public String login(HttpServletRequest request, HttpServletResponse response) {
 		Session session = sessionFactory.openSession();
 		try {
@@ -109,10 +101,14 @@ public class AuthController {
 				
 				if (customer != null) {
 					customer.getUser().setPassword(null);
-					request.getSession().setAttribute("customer", customer);					
+					Admin _admin = null;
+					request.getSession().setAttribute("customer", customer);	
+					request.getSession().setAttribute("admin", _admin);	
 				} else if (admin != null) {
+					Customer _customer = null;
 					admin.getUser().setPassword(null);
-					request.getSession().setAttribute("admin", admin);		
+					request.getSession().setAttribute("admin", admin);
+					request.getSession().setAttribute("customer", _customer);
 				}
 
 				System.out.println(customer);

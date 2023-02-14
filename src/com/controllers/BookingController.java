@@ -1,6 +1,5 @@
 package com.controllers;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import com.models.Admin;
 import com.models.Booking;
-import com.models.Equipment;
+import com.models.Customer;
 
 import dbUtil.HibernateCF;
 
@@ -25,25 +24,36 @@ import dbUtil.HibernateCF;
 public class BookingController {
 	SessionFactory sessionFactory = HibernateCF.getSessionFactory();
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping("")
-	public String manageEquipments(Model model) {
+	public String history(HttpServletRequest request, Model model) {
 		Session session = sessionFactory.openSession();
+		Customer customer  = (Customer) request.getSession().getAttribute("customer");
+		Admin admin = (Admin)request.getSession().getAttribute("admin");
 
-		@SuppressWarnings("unchecked")
-		List<Booking> bookingList = session.createQuery("from Booking").list();
-		model.addAttribute("bookingList", bookingList);
+		List<Booking> bookingList = null;
+		if (admin != null) {
+			bookingList = session.createQuery("from Booking").list();
+		} else if (customer != null) {
+			bookingList = session.createQuery("from Booking where customer_id = :cid")
+					.setParameter("cid", customer.getId()).list();
+		}
 		
+		System.out.println(customer);
+		System.out.println(admin);
+		model.addAttribute("bookingList", bookingList);
+
 		/* redirect */
 		return "history";
 	}
-	
+
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public String submit(HttpServletRequest request, HttpServletResponse response) {
 
 		try (Session session = sessionFactory.openSession();) {
 
-			Booking booking = new Booking ();
-			
+			Booking booking = new Booking();
+
 			session.beginTransaction();
 			session.save(booking);
 			session.getTransaction().commit();
