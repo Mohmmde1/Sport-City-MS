@@ -24,6 +24,16 @@ public class Event {
 	@Column(name="end_date")
 	String endDate;
 	
+	public Event() {
+		
+	}
+	
+	public Event(String name, String startDate, String endDate) {
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
 	public int getId() {
 		return id;
 	}
