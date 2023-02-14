@@ -1,7 +1,10 @@
 package com.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +20,7 @@ import com.models.Booking;
 import com.models.Customer;
 import com.models.Equipment;
 import com.models.Facility;
+import com.models.User;
 
 import dbUtil.HibernateCF;
 
@@ -27,13 +31,14 @@ public class BookingController {
 	SessionFactory sessionFactory = HibernateCF.getSessionFactory();
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping("history")
+	@RequestMapping(value="history", method = RequestMethod.GET)
 	public String history(HttpServletRequest request, Model model) {
 		Session session = sessionFactory.openSession();
 		Customer customer  = (Customer) request.getSession().getAttribute("customer");
 		Admin admin = (Admin)request.getSession().getAttribute("admin");
 
-		List<Booking> bookingList = null;
+		List<Booking> bookingList = new ArrayList<Booking>();
+		
 		if (admin != null) {
 			bookingList = session.createQuery("from Booking").list();
 		} else if (customer != null) {
@@ -71,23 +76,37 @@ public class BookingController {
 			Customer customer  = (Customer) request.getSession().getAttribute("customer");
 			Admin admin = (Admin)request.getSession().getAttribute("admin");
 			
+			int facility_id = Integer.parseInt(request.getParameter("facility_id"));
+			int equipment_id = Integer.parseInt(request.getParameter("equipment_id"));
+			
+			
+			Facility facility = (Facility) session.createQuery("from Facility where id = :facility_id")
+					.setParameter("facility_id", facility_id).uniqueResult();
+			
+			Equipment equipment = (Equipment) session.createQuery("from Equipment where id = :equipment_id")
+					.setParameter("equipment_id", equipment_id).uniqueResult();
+			
 			Booking booking = new Booking();
 			
-//			booking.setFacility(request.getParameter("facility"));
-//			booking.setEquipment(request.getParameter("equipment"));
+			booking.setStartDate(request.getParameter("from"));
+			booking.setEndDate(request.getParameter("to"));
+			booking.setFacility(facility);
+			booking.setEquipment(equipment);
 			
 			if(customer != null) {
 				booking.setCustomer(customer);
-			}else if(admin != null) { /** nothing **/ }
-			else { return "errorPage"; }
+			}
+			else if(admin != null) { /** nothing **/ }
+			else { return "notAuthorized"; }
 
 			session.beginTransaction();
 			session.save(booking);
 			session.getTransaction().commit();
 			
-			return "history";
+			return "new";
 		} catch (Exception ex) {
-			return "errorPage";
+			return "redirect:/booking/new";
+//			return "errorPage";
 		}
 	}
 

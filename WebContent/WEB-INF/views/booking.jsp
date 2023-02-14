@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %>
+
+<%@ page import="com.models.Facility" %>
+<%@ page import="com.models.Equipment" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,40 +46,50 @@
     </nav>
 
     <div class="container-fluid">
-      <form class="section row">
+      <form class="section row" action="new" method="POST">
         <div class="mb-3">
           <label for="facility" class="form-label">Facility</label>
-          <select class="form-select" name="facility_id" aria-label="Default select example">
+          <select required class="form-select" name="facility_id" aria-label="Default select example">
             <option selected>select facility</option>
-            <option value="1">Football field</option>
-            <option value="2">Basketball court</option>
-            <option value="3">Tennis court</option>
+            <%
+				List<Facility> facilityList = (List<Facility>) request.getAttribute("facilityList");
+				for (Facility facility : facilityList) {
+			%>
+					<option value="<%=facility.getId()%>"><%=facility.getName()%></option>
+			<%
+				}
+			%>
           </select>
         </div>
         <div class="mb-3">
           <label for="equipment" class="form-label">Equipment</label>
-          <select class="form-select" name="equipment_id" aria-label="Default select example">
+          <select required class="form-select" name="equipment_id" aria-label="Default select example">
             <option selected>select equipment</option>
-            <option value="1">Goalkeeper machine</option>
-            <option value="2">obstacles</option>
+			<%
+				List<Equipment> equipmentsList = (List<Equipment>) request.getAttribute("equipmentsList");
+				for (Equipment equipment : equipmentsList) {
+			%>
+					<option value="<%=equipment.getId()%>"><%=equipment.getName()%></option>
+			<%
+				}
+			%>
           </select>
         </div>
         <div class="mb-3 col-6">
           <label for="from" class="form-label">from</label>
-          <input type="datetime-local" class="form-control light-border" id="from">
+          <input required type="datetime-local" name="from" class="form-control light-border" id="from">
         </div>
         <div class="mb-3 col-6">
           <label for="to" class="form-label">to</label>
-          <input type="datetime-local" class="form-control light-border" id="to">
+          <input required type="datetime-local" name="to"  class="form-control light-border" id="to">
         </div>
-        <div class="mb-3 col-6">
-          <label for="price" class="form-label">Price</label>
-          <input type="text" class="form-control light-border" id="price" readonly>
-        </div>
+	      <button type="submit" class="btn btn-success col-1 mx-3">
+	        Book
+	      </button>
+	      <a href="history" class="btn btn-secondary col-1 mx-3">
+	        View History
+	      </a>
       </form>
-      <a href="history.jsp" class="btn btn-success col-1">
-        Book
-      </a>
     </div>
   </div>
 
