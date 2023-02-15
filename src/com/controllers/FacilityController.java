@@ -40,10 +40,12 @@ public class FacilityController {
 				json += "\"location\": \"" + facility.getLocation() + "\", ";
 				json += "\"capacity\": " + facility.getCapacity() + ", ";
 				json += "\"price\": " + facility.getPrice() + ", ";
+
 				if (facility.getEmployee() != null)
 					json += "\"person\": \"" + facility.getEmployee().getName() + "\", ";
 				else
 					json += "\"person\": \"" + "" + "\", ";
+
 				json += "\"status\": \"" + facility.getStatus() + "\"}, ";
 			}
 			json = json.substring(0, json.length() - 2) + "]";
@@ -61,6 +63,7 @@ public class FacilityController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
+
 	public String update(HttpServletRequest request, HttpServletResponse response, HttpSession http_session) throws IOException {
 		http_session.invalidate();
 		http_session = request.getSession(true);
@@ -79,6 +82,7 @@ public class FacilityController {
 
 	        // re-query the database to get the updated facility list
 	        List<Facility> facilityList = session.createQuery("from Facility").list();
+
 
 	        // update the facility list in the session attribute
 	        http_session.setAttribute("facilityList", facilityList);

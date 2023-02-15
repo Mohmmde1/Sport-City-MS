@@ -30,8 +30,7 @@
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">
 					<p>
-						<img src="<c:url value="/resources/images/logo.png" />"
-							alt="sportscorner-logo"> <span
+						<img src='<c:url value="/resources/images/logo.png" />'	alt="sportscorner-logo"> <span
 							class="fw-bold fs-2 mx-2 text-white"> Sportscorner </span>
 					</p>
 				</a>
@@ -47,7 +46,7 @@
 						<a class="text-white nav-link" href="profile/getById?id=2">Profile</a>
 						<a class="text-white nav-link" href="events/manage">Events</a>
 						<a class="text-white nav-link" href="equipments/manage">Equipment</a>
-						<a class="text-white nav-link" href="booking.jsp">Booking</a>
+						<a class="text-white nav-link" href="booking/history">Booking</a>
 						<a class="text-white nav-link" href="report">Report</a>
 						<a class="text-white nav-link" href="feedback/">Feedback</a>
 						<a class="text-white nav-link" href="employees/manage">Recruit</a>

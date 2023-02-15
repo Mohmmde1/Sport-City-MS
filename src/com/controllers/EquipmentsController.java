@@ -77,7 +77,7 @@ public class EquipmentsController {
 		
 		response.sendRedirect("manage");
 		
-		return "landing";
+		return "index";
 	}
 	
 	@RequestMapping("/delete")
@@ -94,7 +94,7 @@ public class EquipmentsController {
 		
 		response.sendRedirect("manage");
 
-		return "landing";
+		return "index";
 	}
 	
 	@RequestMapping("/update")
@@ -112,6 +112,6 @@ public class EquipmentsController {
 		
 		response.sendRedirect("manage");
 
-		return "landing";
+		return "index";
 	}
 }
