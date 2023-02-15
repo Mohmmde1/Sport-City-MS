@@ -100,7 +100,7 @@
 			</div>
 
 			<div class="col-6 d-flex justify-content-end mt-5">
-				<button type="submit" class="btn btn-primary w-25">Save</button>
+				<button type="submit" class="btn btn-secondary w-25" style="background-color: #00C3A0;">Save</button>
 			</div>
 		</form>
 	</div>
