@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.models.Admin;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.models.Employee;
 import com.models.Facility;
 import com.models.User;
@@ -32,18 +33,8 @@ public class FacilityController {
 		try (Session session = sessionFactory.openSession()) {
 			List<Facility> facilityList = session.createQuery("from Facility").list();
 			List<Employee> employeesList = session.createQuery("from Employee").list();
-			String json = "[";
-			for (Facility facility : facilityList) {
-				json += "{\"id\": " + facility.getId() + ", ";
-				json += "\"name\": \"" + facility.getName() + "\", ";
-				json += "\"location\": \"" + facility.getLocation() + "\", ";
-				json += "\"capacity\": " + facility.getCapacity() + ", ";
-				json += "\"price\": " + facility.getPrice() + ", ";
-				if(facility.getEmployee() != null)
-				json += "\"person\": \"" + facility.getEmployee().getName() + "\", ";
-				json += "\"status\": \"" + facility.getStatus() + "\"}, ";
-			}
-			json = json.substring(0, json.length() - 2) + "]";
+
+			String json = new Gson().toJson(facilityList);
 
 			http_session.setAttribute("facilityList", facilityList);
 			http_session.setAttribute("employeesList", employeesList);
@@ -73,22 +64,8 @@ public class FacilityController {
 			session.update(facility);
 			session.getTransaction().commit();
 			request.setAttribute("facility", facility);
-			return "manage_facilities";
+			return "redirect:/facility/";
 
-		} 
-	}
-
-	@RequestMapping("/getById")
-	public String getById(HttpServletRequest request, Model model) {
-		int id = Integer.parseInt(request.getParameter("id"));
-		try (Session session = sessionFactory.openSession()) {
-			User user = session.get(User.class, id);
-			request.setAttribute("user", user);
-			return "manage_profile";
-		} catch (Exception e) {
-			// log the error or handle it in some other way
-			e.printStackTrace();
-			return "An error occurred while trying to retrieve the admin list.";
 		}
 	}
 
