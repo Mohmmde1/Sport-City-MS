@@ -1,5 +1,6 @@
 package com.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +40,12 @@ public class FacilityController {
 				json += "\"location\": \"" + facility.getLocation() + "\", ";
 				json += "\"capacity\": " + facility.getCapacity() + ", ";
 				json += "\"price\": " + facility.getPrice() + ", ";
-				if(facility.getEmployee() != null)
-				json += "\"person\": \"" + facility.getEmployee().getName() + "\", ";
+
+				if (facility.getEmployee() != null)
+					json += "\"person\": \"" + facility.getEmployee().getName() + "\", ";
+				else
+					json += "\"person\": \"" + "" + "\", ";
+
 				json += "\"status\": \"" + facility.getStatus() + "\"}, ";
 			}
 			json = json.substring(0, json.length() - 2) + "]";
@@ -54,29 +59,56 @@ public class FacilityController {
 			e.printStackTrace();
 			return "An error occurred while trying to retrieve the admin list.";
 		}
-//		return "manage_facilities";
+
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(HttpServletRequest request, HttpServletResponse response) {
-		try (Session session = sessionFactory.openSession();) {
 
-			session.beginTransaction();
-			Facility facility = session.get(Facility.class, Integer.parseInt(request.getParameter("selectedFacility")));
-			facility.setCapacity(Integer.parseInt(request.getParameter("capacity")));
-			facility.setLocation(request.getParameter("location"));
-			facility.setStatus(request.getParameter("status"));
-			facility.setPrice(Double.parseDouble(request.getParameter("price")));
-			Employee employee = session.get(Employee.class, Integer.parseInt(request.getParameter("selectedEmployee")));
-			facility.setEmployee(employee);
+	public String update(HttpServletRequest request, HttpServletResponse response, HttpSession http_session) throws IOException {
+		http_session.invalidate();
+		http_session = request.getSession(true);
+	    try (Session session = sessionFactory.openSession();) {
+	        session.beginTransaction();
+	        Facility facility = session.get(Facility.class, Integer.parseInt(request.getParameter("selectedFacility")));
+	        facility.setCapacity(Integer.parseInt(request.getParameter("capacity")));
+	        facility.setLocation(request.getParameter("location"));
+	        facility.setStatus(request.getParameter("status"));
+	        facility.setPrice(Double.parseDouble(request.getParameter("price")));
+	        Employee employee = session.get(Employee.class, Integer.parseInt(request.getParameter("selectedEmployee")));
+	        facility.setEmployee(employee);
 
-			session.update(facility);
-			session.getTransaction().commit();
-			request.setAttribute("facility", facility);
-			return "manage_facilities";
+	        session.update(facility);
+	        session.getTransaction().commit();
 
-		} 
+	        // re-query the database to get the updated facility list
+	        List<Facility> facilityList = session.createQuery("from Facility").list();
+
+
+	        // update the facility list in the session attribute
+	        http_session.setAttribute("facilityList", facilityList);
+
+	        // update the json in the session attribute
+	        String json = "[";
+	        for (Facility f : facilityList) {
+	            json += "{\"id\": " + f.getId() + ", ";
+	            json += "\"name\": \"" + f.getName() + "\", ";
+	            json += "\"location\": \"" + f.getLocation() + "\", ";
+	            json += "\"capacity\": " + f.getCapacity() + ", ";
+	            json += "\"price\": " + f.getPrice() + ", ";
+	            if (f.getEmployee() != null)
+	                json += "\"person\": \"" + f.getEmployee().getName() + "\", ";
+	            else
+	                json += "\"person\": \"" + "" + "\", ";
+	            json += "\"status\": \"" + f.getStatus() + "\"}, ";
+	        }
+	        json = json.substring(0, json.length() - 2) + "]";
+	        http_session.setAttribute("json", json);
+
+	        // redirect to the submit method to show the updated facility list
+	        return "/index";
+	    } 
 	}
+
 
 	@RequestMapping("/getById")
 	public String getById(HttpServletRequest request, Model model) {
