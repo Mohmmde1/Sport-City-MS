@@ -50,7 +50,7 @@ public class EmployeesController {
 
 		response.sendRedirect("manage");
 
-		return "landing";
+		return "index";
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -67,6 +67,6 @@ public class EmployeesController {
 
 		response.sendRedirect("manage");
 
-		return "landing";
+		return "index";
 	}
 }
