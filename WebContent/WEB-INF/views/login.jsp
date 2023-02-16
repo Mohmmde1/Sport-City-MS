@@ -62,8 +62,12 @@
 					haven't registered yet? <a href="register">click here</a>
 				</p>
 				<div class="d-grid gap-2">
+				<div class="d-grid gap-2">
 					<input type="submit" class="btn btn-success" value="Login">
 				</div>
+				
+					 <a href="feedback/">Provide us with Feedback</a>
+				
 			</div>
 		</form>
 	</div>
