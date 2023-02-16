@@ -9,16 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.models.Employee;
 import com.models.Facility;
-import com.models.User;
 
 import dbUtil.HibernateCF;
 
@@ -30,6 +26,7 @@ public class FacilityController {
 
 	@RequestMapping("/")
 	public String submit(HttpServletRequest request, HttpSession http_session) {
+		if(request.getSession().getAttribute("admin") == null) return "errorPage";
 		try (Session session = sessionFactory.openSession()) {
 			List<Facility> facilityList = session.createQuery("from Facility").list();
 			List<Employee> employeesList = session.createQuery("from Employee").list();
@@ -43,9 +40,9 @@ public class FacilityController {
 		} catch (Exception e) {
 			// log the error or handle it in some other way
 			e.printStackTrace();
-			return "An error occurred while trying to retrieve the admin list.";
+			return "errorPage";
 		}
-//		return "manage_facilities";
+
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

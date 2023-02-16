@@ -23,13 +23,20 @@ import dbUtil.HibernateCF;
 public class ProfileController {
 	SessionFactory sessionFactory = HibernateCF.getSessionFactory();
 
+	@RequestMapping("/")
+	public String redirect(HttpServletRequest request) {
+		request.setAttribute("user", (User)request.getSession().getAttribute("user"));
+		return "manage_profile";
+
+	}
+
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(HttpServletRequest request, HttpServletResponse response) {
-		int id = Integer.parseInt(request.getParameter("id"));
 		try (Session session = sessionFactory.openSession();) {
 
 			session.beginTransaction();
-			User user = session.get(User.class, id);
+			User user = (User) request.getSession().getAttribute("user");
+			user = session.get(User.class, user.getId());
 			user.setFname(request.getParameter("fname"));
 			user.setLname(request.getParameter("lname"));
 			user.setUsername(request.getParameter("email"));
@@ -41,23 +48,7 @@ public class ProfileController {
 			request.setAttribute("user", user);
 			return "manage_profile";
 
-		} catch (Exception ex) {
-			return "errorPage";
-		}
-	}
-
-	@RequestMapping("/getById")
-	public String getById(HttpServletRequest request, Model model) {
-		int id = Integer.parseInt(request.getParameter("id"));
-		try (Session session = sessionFactory.openSession()) {
-			User user = session.get(User.class, id);
-			request.setAttribute("user", user);
-			return "manage_profile";
-		} catch (Exception e) {
-			// log the error or handle it in some other way
-			e.printStackTrace();
-			return "An error occurred while trying to retrieve the admin list.";
-		}
+		} 
 	}
 
 }
