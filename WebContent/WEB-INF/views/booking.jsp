@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List" %>
@@ -22,7 +24,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css">
+  <link href="<c:url value="/resources/css/main.css" />"
+	rel="stylesheet">
 </head>
 
 <body class="bg-white">
@@ -54,6 +57,7 @@
             <%
 				List<Facility> facilityList = (List<Facility>) request.getAttribute("facilityList");
 				for (Facility facility : facilityList) {
+					if(facility.getStatus()=="Under Maintenance") continue;
 			%>
 					<option value="<%=facility.getId()%>"><%=facility.getName()%></option>
 			<%
