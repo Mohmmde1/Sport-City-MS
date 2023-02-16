@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 	@RequestMapping("") 
     public void home(HttpServletResponse response) throws IOException {
-        response.sendRedirect("register");
+        response.sendRedirect("login");
     }
 	
 	@RequestMapping(value = "/error")

@@ -15,7 +15,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Make booking</title>
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -35,9 +35,8 @@
         <div class="row d-flex align-items-center justify-content-center w-100">
           <a class="navbar-brand justify-content-start col-5 col me-0" href="#">
             <p>
-              <img src='<c:url value="/resources/images/logo.png" />' alt="sportscorner-logo">
               <span class="fw-bold fs-2 mx-2 text-dark">
-                Sportscorner
+                Sportscorner | Make Booking
               </span>
             </p>
           </a>
