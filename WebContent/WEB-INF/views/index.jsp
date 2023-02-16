@@ -56,7 +56,9 @@
 							<a class="text-white nav-link" href="equipments/manage">Equipment</a>
 							<a class="text-white nav-link" href="report">Report</a>
 							<a class="text-white nav-link" href="employees/manage">Recruit</a>
+							<a class="text-white nav-link" href="booking/history">Booking</a>
 							<a class="text-white nav-link" href="login">Log out</a>
+							
 						</c:if>
 						<c:if test="${empty sessionScope.admin}">
 							<a class="text-white nav-link" href="profile/">Profile</a>

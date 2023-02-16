@@ -109,7 +109,9 @@
 
 				</tbody>
 			</table>
+			<c:if test="${empty sessionScope.admin }">
 			<a href="new" class="btn btn-success col-1"> Book now </a>
+			</c:if>
 		</div>
 	</div>
 
