@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.models.Equipment;
 import com.models.Facility;
@@ -113,5 +116,11 @@ public class EquipmentsController {
 		response.sendRedirect("manage");
 
 		return "index";
+	}
+	
+	@ExceptionHandler(value = ConstraintViolationException.class)
+	@ResponseBody()
+	public String handleConstraintViolationException(Exception e) {
+		return "You cannot delete this equipment because it is booked by a customer.";
 	}
 }

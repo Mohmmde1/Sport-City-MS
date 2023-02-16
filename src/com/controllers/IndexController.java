@@ -1,5 +1,7 @@
 package com.controllers;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -9,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 	@RequestMapping("") 
-    public String home(Model model) {
-        return "login";
+    public void home(HttpServletResponse response) throws IOException {
+        response.sendRedirect("register");
     }
 	
 	@RequestMapping(value = "/error")

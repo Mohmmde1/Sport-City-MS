@@ -70,12 +70,14 @@
 			</div>
 		</nav>
 
+
 		<c:if test="${empty sessionScope.user }">
 			<div id="join-container"
 				class="container d-flex justify-content-center ">
-				<a href="landing.jsp" class="btn btn-success"> Join Now </a>
+				<a href="register" class="btn btn-success"> Join Now </a>
 			</div>
 		</c:if>
+
 	</div>
 	<!-- Js bundle -->
 	<script
