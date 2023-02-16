@@ -25,6 +25,7 @@ public class ProfileController {
 
 	@RequestMapping("/")
 	public String redirect(HttpServletRequest request) {
+		if(request.getSession().getAttribute("user")==null) return "errorPage";
 		request.setAttribute("user", (User)request.getSession().getAttribute("user"));
 		return "manage_profile";
 
@@ -45,6 +46,8 @@ public class ProfileController {
 				user.setDob(request.getParameter("dob"));
 			session.update(user);
 			session.getTransaction().commit();
+			request.removeAttribute("user");
+			System.out.println("HI");
 			request.setAttribute("user", user);
 			return "manage_profile";
 

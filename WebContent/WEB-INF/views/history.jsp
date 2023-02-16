@@ -90,7 +90,10 @@
 					         <%
 					            if (end.after(new Date())) {
 					         %>
+					         <form action="delete" method="post">
+					         	<input type="hidden" name="id" value="<%= b.getId() %>">
 					            <button class="btn btn-outline-danger">Cancel</button>
+					         </form>
 					         <%
 					            } else {
 					         %>

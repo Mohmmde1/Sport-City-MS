@@ -19,7 +19,8 @@
 					<h1 class="text-center">Error</h1>
 					<hr>
 					<p>An error has occurred. Please try again later.</p>
-					<a href="/" class="btn btn-primary">Go Home</a>
+					<a href="${pageContext.request.contextPath}/" class="btn btn-primary">Go Home</a>
+
 				</div>
 			</div>
 		</div>
