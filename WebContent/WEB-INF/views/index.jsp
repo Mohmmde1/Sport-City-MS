@@ -30,7 +30,8 @@
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">
 					<p>
-						<img src='<c:url value="/resources/images/logo.png" />'	alt="sportscorner-logo"> <span
+						<img src='<c:url value="/resources/images/logo.png" />'
+							alt="sportscorner-logo"> <span
 							class="fw-bold fs-2 mx-2 text-white"> Sportscorner </span>
 					</p>
 				</a>
@@ -40,28 +41,42 @@
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
+
+
+
+
+
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
-						<a class="text-white nav-link" href="facility/">Facilities</a>
-						<a class="text-white nav-link" href="profile/getById?id=2">Profile</a>
-						<a class="text-white nav-link" href="events/manage">Events</a>
-						<a class="text-white nav-link" href="equipments/manage">Equipment</a>
-						<a class="text-white nav-link" href="booking/history">Booking</a>
-						<a class="text-white nav-link" href="report">Report</a>
-						<a class="text-white nav-link" href="feedback/">Feedback</a>
-						<a class="text-white nav-link" href="employees/manage">Recruit</a>
+						<c:if test="${not empty sessionScope.admin}">
+							<!-- Show admin content here -->
+							<a class="text-white nav-link" href="facility/">Facilities</a>
+							<a class="text-white nav-link" href="profile/">Profile</a>
+							<a class="text-white nav-link" href="events/manage">Events</a>
+							<a class="text-white nav-link" href="equipments/manage">Equipment</a>
+							<a class="text-white nav-link" href="report">Report</a>
+							<a class="text-white nav-link" href="employees/manage">Recruit</a>
+							<a class="text-white nav-link" href="login">Log out</a>
+						</c:if>
+						<c:if test="${empty sessionScope.admin}">
+							<a class="text-white nav-link" href="profile/">Profile</a>
+							<a class="text-white nav-link" href="booking/history">Booking</a>
+							<a class="text-white nav-link" href="login">Log out</a>
+						</c:if>
 					</div>
 				</div>
+
+
 			</div>
 		</nav>
 
-
-		<div id="join-container"
-			class="container d-flex justify-content-center ">
-			<a href="landing.jsp" class="btn btn-success"> Join Now </a>
-		</div>
+		<c:if test="${empty sessionScope.user }">
+			<div id="join-container"
+				class="container d-flex justify-content-center ">
+				<a href="landing.jsp" class="btn btn-success"> Join Now </a>
+			</div>
+		</c:if>
 	</div>
-
 	<!-- Js bundle -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
