@@ -78,6 +78,7 @@ public class AuthController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request) {
+		request.getSession().invalidate();
 		return "login";
 	}
 
@@ -97,15 +98,15 @@ public class AuthController {
 			} else {
 				Customer customer = (Customer) session.createQuery("from Customer where user_id = :user_id")
 						.setParameter("user_id", user.getId()).uniqueResult();
-				
+
 				Admin admin = (Admin) session.createQuery("from Admin where user_id = :user_id")
 						.setParameter("user_id", user.getId()).uniqueResult();
-				
+
 				if (customer != null) {
 					customer.getUser().setPassword(null);
 					Admin _admin = null;
-					request.getSession().setAttribute("customer", customer);	
-					request.getSession().setAttribute("admin", _admin);	
+					request.getSession().setAttribute("customer", customer);
+					request.getSession().setAttribute("admin", _admin);
 				} else if (admin != null) {
 					Customer _customer = null;
 					admin.getUser().setPassword(null);
@@ -115,7 +116,7 @@ public class AuthController {
 
 				System.out.println(customer);
 				System.out.println(admin);
-
+				request.getSession().setAttribute("user", user);
 				return "index";
 			}
 		} catch (Exception ex) {
